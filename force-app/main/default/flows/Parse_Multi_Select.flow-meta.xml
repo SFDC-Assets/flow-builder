@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>Add_Left_Value</name>
+        <label>Add Left Value</label>
+        <locationX>200</locationX>
+        <locationY>21</locationY>
+        <assignmentItems>
+            <assignToReference>output_ParsedMultiSelect</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Grab_Left_Value</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Remove_Last_Parsed_Value</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Remove_Brackets</name>
+        <label>Remove Brackets</label>
+        <locationX>24</locationX>
+        <locationY>22</locationY>
+        <assignmentItems>
+            <assignToReference>Multi_Select_Value</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Multi_Select_Value_No_Brackets</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_Left_Value</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Remove_Last_Parsed_Value</name>
+        <label>Remove Last Parsed Value</label>
+        <locationX>383</locationX>
+        <locationY>20</locationY>
+        <assignmentItems>
+            <assignToReference>Multi_Select_Value</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Remaining_Multi_Select_Values</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Remaining_Values_to_be_Parsed</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Remaining_Values_to_be_Parsed</name>
+        <label>Remaining Values to be Parsed?</label>
+        <locationX>383</locationX>
+        <locationY>133</locationY>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Multi_Select_Value</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_Left_Value</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Re-usable Flow to Parse any type of Multi-Select String that is separated by semicolons.</description>
+    <formulas>
+        <description>Grabs the Left Value in the Multi-Select Picklist</description>
+        <name>Grab_Left_Value</name>
+        <dataType>String</dataType>
+        <expression>(LEFT({!Multi_Select_Value},FIND(&quot;;&quot;,{!Multi_Select_Value})-1))</expression>
+    </formulas>
+    <formulas>
+        <name>Multi_Select_Value_No_Brackets</name>
+        <dataType>String</dataType>
+        <expression>TRIM( 
+          SUBSTITUTE(
+                                 SUBSTITUTE(
+                                                         {!input_MultiSelectString}, 
+                                                         &quot;[&quot;,&quot;&quot;),
+                                  &quot;]&quot;,&quot;&quot;)
+) + &quot;;&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>Remaining_Multi_Select_Values</name>
+        <dataType>String</dataType>
+        <expression>(RIGHT({!Multi_Select_Value},LEN({!Multi_Select_Value})-FIND(&quot;;&quot;,{!Multi_Select_Value})))</expression>
+    </formulas>
+    <interviewLabel>Parse Multi-Select {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Parse Multi-Select</label>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>Remove_Brackets</startElementReference>
+    <status>Active</status>
+    <textTemplates>
+        <name>Multi</name>
+        <text>[Books and Books; Powell&#39;s Books; Dolphins; Really?; yes!; awesomeness dudeeeeeeeeeee]</text>
+    </textTemplates>
+    <variables>
+        <name>input_MultiSelectString</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Multi_Select_Value</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>output_ParsedMultiSelect</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Phone_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Phone Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>iPhone Xs</fullName>
+                <default>false</default>
+                <label>iPhone Xs</label>
+            </value>
+            <value>
+                <fullName>Samsung Galaxy S10</fullName>
+                <default>false</default>
+                <label>Samsung Galaxy S10</label>
+            </value>
+            <value>
+                <fullName>Google Pixel 4</fullName>
+                <default>false</default>
+                <label>Google Pixel 4</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

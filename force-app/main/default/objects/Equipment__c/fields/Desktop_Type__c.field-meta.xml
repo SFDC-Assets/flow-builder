@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Desktop_Type__c</fullName>
+    <description>The item that is being provisioned</description>
+    <externalId>false</externalId>
+    <label>Desktop Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Mac Pro</fullName>
+                <default>false</default>
+                <label>Mac Pro</label>
+            </value>
+            <value>
+                <fullName>Dell PC Desktop</fullName>
+                <default>false</default>
+                <label>Dell PC Desktop</label>
+            </value>
+            <value>
+                <fullName>Linux Desktop</fullName>
+                <default>false</default>
+                <label>Linux Desktop</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
