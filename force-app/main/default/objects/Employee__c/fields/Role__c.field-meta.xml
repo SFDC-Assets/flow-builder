@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Role__c</fullName>
+    <externalId>false</externalId>
+    <label>Role</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Department__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CSG - CFL</fullName>
+                <default>false</default>
+                <label>CSG - CFL</label>
+            </value>
+            <value>
+                <fullName>CSG - Services</fullName>
+                <default>false</default>
+                <label>CSG - Services</label>
+            </value>
+            <value>
+                <fullName>Account Executive</fullName>
+                <default>false</default>
+                <label>Account Executive</label>
+            </value>
+            <value>
+                <fullName>Business Development</fullName>
+                <default>false</default>
+                <label>Business Development</label>
+            </value>
+            <value>
+                <fullName>Sales Manager</fullName>
+                <default>false</default>
+                <label>Sales Manager</label>
+            </value>
+            <value>
+                <fullName>Solution Engineer</fullName>
+                <default>false</default>
+                <label>Solution Engineer</label>
+            </value>
+            <value>
+                <fullName>Alliances &amp; Channels</fullName>
+                <default>false</default>
+                <label>Alliances &amp; Channels</label>
+            </value>
+            <value>
+                <fullName>Market Readiness</fullName>
+                <default>false</default>
+                <label>Market Readiness</label>
+            </value>
+            <value>
+                <fullName>Sales Strategy</fullName>
+                <default>false</default>
+                <label>Sales Strategy</label>
+            </value>
+            <value>
+                <fullName>Products - Other</fullName>
+                <default>false</default>
+                <label>Products - Other</label>
+            </value>
+            <value>
+                <fullName>Products - Product Manager</fullName>
+                <default>false</default>
+                <label>Products - Product Manager</label>
+            </value>
+            <value>
+                <fullName>Products - Program Manager</fullName>
+                <default>false</default>
+                <label>Products - Program Manager</label>
+            </value>
+            <value>
+                <fullName>Products - User Experience</fullName>
+                <default>false</default>
+                <label>Products - User Experience</label>
+            </value>
+            <value>
+                <fullName>Products - Content Experience</fullName>
+                <default>false</default>
+                <label>Products - Content Experience</label>
+            </value>
+            <value>
+                <fullName>Technology - Developer</fullName>
+                <default>false</default>
+                <label>Technology - Developer</label>
+            </value>
+            <value>
+                <fullName>Technology - Quality Engineer</fullName>
+                <default>false</default>
+                <label>Technology - Quality Engineer</label>
+            </value>
+            <value>
+                <fullName>Technology - Other</fullName>
+                <default>false</default>
+                <label>Technology - Other</label>
+            </value>
+            <value>
+                <fullName>Employee</fullName>
+                <default>false</default>
+                <label>Employee</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Hotel Operations Manager</fullName>
+                <default>false</default>
+                <label>Manager</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Customer Success</controllingFieldValue>
+            <valueName>CSG - CFL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customer Success</controllingFieldValue>
+            <valueName>CSG - Services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customer Success</controllingFieldValue>
+            <controllingFieldValue>Finance/Accounting</controllingFieldValue>
+            <controllingFieldValue>Marketing</controllingFieldValue>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <controllingFieldValue>Sales Support</controllingFieldValue>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Finance/Accounting</controllingFieldValue>
+            <controllingFieldValue>Marketing</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>Employee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Account Executive</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Business Development</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Sales Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Solution Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales Support</controllingFieldValue>
+            <valueName>Alliances &amp; Channels</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales Support</controllingFieldValue>
+            <valueName>Market Readiness</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales Support</controllingFieldValue>
+            <valueName>Sales Strategy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <valueName>Products - Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <valueName>Products - Product Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <valueName>Products - Program Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <valueName>Products - User Experience</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <valueName>Products - Content Experience</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <valueName>Technology - Developer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <valueName>Technology - Quality Engineer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Technology &amp; Products</controllingFieldValue>
+            <valueName>Technology - Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hotel Operations</controllingFieldValue>
+            <valueName>Hotel Operations Manager</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

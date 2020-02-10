@@ -1,0 +1,55 @@
+<template>
+    <canvas class={confettiClass} id="canvas" lwc:dom="manual"></canvas>
+    <div class="wrapper">
+        <div class={modalClass}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <h2 class="slds-modal__title">WOOHOO!</h2>
+                        <p class="slds-m-top_x-small">You've got a shiny new badge.</p>
+                        <div><img src={badgeUrl}></div>
+                        <div><button class="slds-button slds-button_brand" onclick={closeModal}>Earn more badges</button></div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+        <h1>Using Voice Commands</h1>
+        <p>After completing this unit, you’ll be able to:</p>
+        <ul>
+            <li>Explain what Einstein Voice is.</li>
+            <li>Discuss how Einstein Voice can impact you and your business.</li>
+        </ul>
+        <h2>What Is Einstein Voice?</h2>
+        <p>Let’s look at this hypothetical scenario: Hans Albert is a newly promoted VP of Sales and needs to close a lot of business. After deploying Einstein, Hans has been able to close more deals.</p>
+        <div><img src={eaTrail1Url}></div>
+        <p>With his success though, he’s also been given more responsibility, and he knows that he needs to step up his game in order to keep his team on track and to stay ahead of his competition. </p>
+        <div><img src={eaTrail2Url}></div>
+        <p>Lo and behold, he learns that Salesforce has developed new products powered by new Einstein 3Voice technology, Einstein Voice Assistant and Einstein Voice Bots, that can enable him and his end customers to talk directly to Salesforce from any device.  </p>
+        <div><img src={eaTrail3Url}></div>
+        <h2>Einstein Voice Assistant</h2>
+        <p>With the help of Einstein, Hans can also find, filter, and create dashboards with his voice. Now, when his boss asks him questions about how business is going, Hans can simply say “Hey Einstein, pull up my opportunities in EMEA,” and this information shows up without having to click around. </p>
+        <div class="quiz" onclick={clickHandler}>
+            <h1>Quiz <div>+100 points</div></h1>
+            <div class="question">
+                <h2><span>1</span> The two components of Einstein Voice are Einstein Voice Assistant and Einstein Voice Bots.</h2>
+                <ol>
+                    <li class={answer1Class}><span>A</span> True</li>
+                    <li><span>B</span> False</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h2><span>1</span> What voice actions can you complete from your mobile device?</h2>
+                <ol>
+                    <li><span>A</span> Create a Rewards Transaction</li>
+                    <li><span>B</span> Book a Reservation</li>
+                    <li><span>C</span> Log a Service Request</li>
+                    <li class={answer2Class}><span>D</span> All of the above</li>                
+                </ol>
+            </div>
+            <div class="footer">
+                <button class={buttonClass}>Check quiz to earn 100 points</button>
+            </div>      
+        </div>
+    </div>
+</template>
