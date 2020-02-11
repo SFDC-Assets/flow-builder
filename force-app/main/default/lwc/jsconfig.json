@@ -5,12 +5,6 @@
         "paths": {
             "c/flowButton": [
                 "flowButton/flowButton.js"
-            ],
-            "c/learningModule": [
-                "learningModule/learningModule.js"
-            ],
-            "c/learningTopic": [
-                "learningTopic/learningTopic.js"
             ]
         }
     },

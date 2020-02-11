@@ -37,10 +37,6 @@
                 <behavior>Edit</behavior>
                 <field>Start_Date__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Applicant_Record__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -173,10 +169,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Software__c.Employee__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Corporate_Card__c.Employee__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
