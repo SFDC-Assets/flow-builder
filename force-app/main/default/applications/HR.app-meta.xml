@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#4ABF76</headerColor>
+        <logo>Human_Resources</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>Human Resources Team</label>
+    <navType>Standard</navType>
+    <tabs>Employee__c</tabs>
+    <tabs>Applicant__c</tabs>
+    <tabs>Equipment__c</tabs>
+    <tabs>Onboarding__c</tabs>
+    <tabs>Assigned_Training__c</tabs>
+    <tabs>Learning_Topic__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>HR_UtilityBar</utilityBar>
+</CustomApplication>
