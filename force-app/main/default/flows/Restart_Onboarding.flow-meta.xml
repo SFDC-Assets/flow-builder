@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Reset_Employee</name>
+        <label>Reset Employee</label>
+        <locationX>262</locationX>
+        <locationY>50</locationY>
+        <actionName>reset</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Reset_Screen</targetReference>
+        </connector>
+    </actionCalls>
+    <interviewLabel>Restart Onboarding {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Restart Onboarding</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Reset_Screen</name>
+        <label>Reset Screen</label>
+        <locationX>479</locationX>
+        <locationY>50</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Reset_Text</name>
+            <fieldText>&lt;p&gt;Employee reset.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Reset_Employee</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>
