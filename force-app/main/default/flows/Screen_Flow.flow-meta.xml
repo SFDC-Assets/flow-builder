@@ -139,18 +139,10 @@
     </assignments>
     <choices>
         <name>chatterChoice</name>
-        <choiceText>Post a Chatter</choiceText>
+        <choiceText>Post to Chatter</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Post a Chatter</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>lwcChoice</name>
-        <choiceText>Lightning Web Component</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>Lightning Web Component</stringValue>
         </value>
     </choices>
     <choices>
@@ -170,8 +162,16 @@
         </value>
     </choices>
     <choices>
+        <name>screenChoice</name>
+        <choiceText>Display a Dynamic, Interactive Screen</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Interact with a Screen</stringValue>
+        </value>
+    </choices>
+    <choices>
         <name>taskChoice</name>
-        <choiceText>Create a Task&lt;p&gt;&lt;br&gt;&lt;/p&gt;</choiceText>
+        <choiceText>Create a Task</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Create a Task</stringValue>
@@ -220,7 +220,7 @@
                 <leftValueReference>flow</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>lwcChoice</elementReference>
+                    <elementReference>screenChoice</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -385,8 +385,8 @@
     <recordLookups>
         <name>Find_a_Match</name>
         <label>Find a Match</label>
-        <locationX>417</locationX>
-        <locationY>547</locationY>
+        <locationX>364</locationX>
+        <locationY>450</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Update_or_Create</targetReference>
@@ -460,7 +460,7 @@
     <screens>
         <name>Choose_Flow_Screen</name>
         <label>Choose Flow Screen</label>
-        <locationX>570</locationX>
+        <locationX>571</locationX>
         <locationY>87</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -469,18 +469,14 @@
             <targetReference>Flow_Assignment</targetReference>
         </connector>
         <fields>
-            <name>flowChoiceTitle</name>
-            <fieldText>&lt;p&gt;Choose a flow!&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>flowChoiceRadio</name>
             <choiceReferences>chatterChoice</choiceReferences>
             <choiceReferences>recordChoice</choiceReferences>
-            <choiceReferences>lwcChoice</choiceReferences>
+            <choiceReferences>screenChoice</choiceReferences>
             <choiceReferences>notificationChoice</choiceReferences>
             <choiceReferences>taskChoice</choiceReferences>
             <dataType>String</dataType>
+            <fieldText>What would you like Flow to do?</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>false</isRequired>
         </fields>
@@ -506,8 +502,8 @@
     <screens>
         <name>Contact_Info</name>
         <label>Contact Info</label>
-        <locationX>419</locationX>
-        <locationY>413</locationY>
+        <locationX>364</locationX>
+        <locationY>245</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -673,8 +669,8 @@
     <screens>
         <name>Record_Flow_Screen</name>
         <label>Record Flow Screen</label>
-        <locationX>667</locationX>
-        <locationY>413</locationY>
+        <locationX>560</locationX>
+        <locationY>245</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
