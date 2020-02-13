@@ -5,6 +5,9 @@
         "paths": {
             "c/flowButton": [
                 "flowButton/flowButton.js"
+            ],
+            "c/lightningWebComponentExample": [
+                "lightningWebComponentExample/lightningWebComponentExample.js"
             ]
         }
     },
