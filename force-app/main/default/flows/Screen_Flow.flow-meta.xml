@@ -196,7 +196,7 @@
             <connector>
                 <targetReference>Record_Flow_Screen</targetReference>
             </connector>
-            <label>Record Flow</label>
+            <label>Create/Modify a Record</label>
         </rules>
         <rules>
             <name>Chatter_Flow</name>
@@ -211,7 +211,7 @@
             <connector>
                 <targetReference>Message_Screen</targetReference>
             </connector>
-            <label>Chatter Flow</label>
+            <label>Post to Chatter</label>
         </rules>
         <rules>
             <name>LWC_Flow</name>
@@ -226,7 +226,7 @@
             <connector>
                 <targetReference>LWC_Screen</targetReference>
             </connector>
-            <label>LWC Flow</label>
+            <label>Display an Interactive Screen</label>
         </rules>
         <rules>
             <name>Notification_Flow</name>
@@ -241,7 +241,7 @@
             <connector>
                 <targetReference>Notification_Screen</targetReference>
             </connector>
-            <label>Notification Flow</label>
+            <label>Send a Notification</label>
         </rules>
         <rules>
             <name>Create_Task_Flow</name>
@@ -256,7 +256,7 @@
             <connector>
                 <targetReference>New_Task</targetReference>
             </connector>
-            <label>Create Task Flow</label>
+            <label>Create a Task</label>
         </rules>
     </decisions>
     <decisions>
