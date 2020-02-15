@@ -30,7 +30,7 @@ export default class lightningWebComponentExample extends LightningElement {
         this.confettiClass = 'confettiCanvas';
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         setTimeout(function() {
-            this.basicCannon();
+            // this.basicCannon();
         }.bind(this), 500);  
     }
 
@@ -44,5 +44,11 @@ export default class lightningWebComponentExample extends LightningElement {
             y: 1
           }
         });
+      }
+
+      handleClick() {
+        setTimeout(function() {
+          this.basicCannon();
+      }.bind(this), 200);
       }
 }

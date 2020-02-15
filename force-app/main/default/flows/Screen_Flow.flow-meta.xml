@@ -4,7 +4,7 @@
         <name>New_Task</name>
         <label>New Task</label>
         <locationX>1115</locationX>
-        <locationY>129</locationY>
+        <locationY>196</locationY>
         <actionName>NewTask</actionName>
         <actionType>quickAction</actionType>
         <connector>
@@ -42,10 +42,48 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
+        <name>Notification_About_Modification</name>
+        <label>Notification About Modification</label>
+        <locationX>1583</locationX>
+        <locationY>1005</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <elementReference>Get_Notification_Id.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>Get_Contact.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>notification_modification_body</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>ArrayOfUserId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>notification_modification_title</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
         <name>Post_to_Chatter</name>
         <label>Post to Chatter</label>
-        <locationX>856</locationX>
-        <locationY>661</locationY>
+        <locationX>1054</locationX>
+        <locationY>735</locationY>
         <actionName>chatterPost</actionName>
         <actionType>chatterPost</actionType>
         <connector>
@@ -67,8 +105,8 @@
     <actionCalls>
         <name>Send_Notification</name>
         <label>Send Notification</label>
-        <locationX>1187</locationX>
-        <locationY>669</locationY>
+        <locationX>1325</locationX>
+        <locationY>563</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
         <connector>
@@ -108,8 +146,8 @@
     <assignments>
         <name>Flow_Assignment</name>
         <label>Flow Assignment</label>
-        <locationX>849</locationX>
-        <locationY>87</locationY>
+        <locationX>886</locationX>
+        <locationY>153</locationY>
         <assignmentItems>
             <assignToReference>flow</assignToReference>
             <operator>Assign</operator>
@@ -125,7 +163,7 @@
         <name>Set_Contact_ID</name>
         <label>Set Contact ID</label>
         <locationX>225</locationX>
-        <locationY>679</locationY>
+        <locationY>746</locationY>
         <assignmentItems>
             <assignToReference>contact.Id</assignToReference>
             <operator>Assign</operator>
@@ -143,6 +181,22 @@
         <dataType>String</dataType>
         <value>
             <stringValue>Post a Chatter</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>confettiChoice</name>
+        <choiceText>Throw Confetti!</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Throw Confetti!</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>modifyChoice</name>
+        <choiceText>View/Modify Record</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>View/Modify Record</stringValue>
         </value>
     </choices>
     <choices>
@@ -180,8 +234,8 @@
     <decisions>
         <name>Decide_a_Flow</name>
         <label>Decide a Flow</label>
-        <locationX>841</locationX>
-        <locationY>242</locationY>
+        <locationX>878</locationX>
+        <locationY>342</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Record_Flow</name>
@@ -224,7 +278,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>LWC_Screen</targetReference>
+                <targetReference>Interactive_Screen</targetReference>
             </connector>
             <label>Display an Interactive Screen</label>
         </rules>
@@ -258,12 +312,64 @@
             </connector>
             <label>Create a Task</label>
         </rules>
+        <rules>
+            <name>View_Modify_Record</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>flow</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>modifyChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>View_Modify_Record_Screen</targetReference>
+            </connector>
+            <label>View/Modify Record</label>
+        </rules>
+        <rules>
+            <name>Throw_Confetti</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>flow</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>confettiChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Confetti</targetReference>
+            </connector>
+            <label>Throw Confetti!</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Send_Notification_Decission</name>
+        <label>Send Notification?</label>
+        <locationX>1171</locationX>
+        <locationY>871</locationY>
+        <defaultConnectorLabel>Don&#39;t</defaultConnectorLabel>
+        <rules>
+            <name>Send</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>notification_alert.value</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Modify_Contact</targetReference>
+            </connector>
+            <label>Send</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Update_or_Create</name>
         <label>Update or Create?</label>
-        <locationX>409</locationX>
-        <locationY>687</locationY>
+        <locationX>458</locationX>
+        <locationY>753</locationY>
         <defaultConnector>
             <targetReference>Create_Contact</targetReference>
         </defaultConnector>
@@ -325,8 +431,8 @@
     <recordCreates>
         <name>Create_Contact</name>
         <label>Create Contact</label>
-        <locationX>623</locationX>
-        <locationY>685</locationY>
+        <locationX>653</locationX>
+        <locationY>754</locationY>
         <connector>
             <targetReference>Confirm</targetReference>
         </connector>
@@ -335,8 +441,8 @@
     <recordLookups>
         <name>Assign_Example_Record</name>
         <label>Assign Example Record</label>
-        <locationX>205</locationX>
-        <locationY>87</locationY>
+        <locationX>379</locationX>
+        <locationY>153</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_User_Id</targetReference>
@@ -356,8 +462,8 @@
     <recordLookups>
         <name>Assign_User_Id</name>
         <label>Assign User Id</label>
-        <locationX>307</locationX>
-        <locationY>87</locationY>
+        <locationX>493</locationX>
+        <locationY>153</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Notification_Id</targetReference>
@@ -385,8 +491,8 @@
     <recordLookups>
         <name>Find_a_Match</name>
         <label>Find a Match</label>
-        <locationX>364</locationX>
-        <locationY>450</locationY>
+        <locationX>465</locationX>
+        <locationY>599</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Update_or_Create</targetReference>
@@ -411,10 +517,65 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_Contact</name>
+        <label>Get Contact</label>
+        <locationX>154</locationX>
+        <locationY>153</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Current_Account_Name</targetReference>
+        </connector>
+        <filters>
+            <field>AccountId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FirstName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Example</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contact</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>AccountId</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>FirstName</queriedFields>
+        <queriedFields>LastName</queriedFields>
+        <queriedFields>Phone</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Current_Account_Name</name>
+        <label>Get Current Account Name</label>
+        <locationX>260</locationX>
+        <locationY>153</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Example_Record</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Contact.AccountId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Notification_Id</name>
         <label>Get Notification Id</label>
-        <locationX>419</locationX>
-        <locationY>87</locationY>
+        <locationX>611</locationX>
+        <locationY>153</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Choose_Flow_Screen</targetReference>
@@ -432,10 +593,51 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
+        <name>Modify_Contact</name>
+        <label>Modify Contact</label>
+        <locationX>1327</locationX>
+        <locationY>871</locationY>
+        <connector>
+            <targetReference>Notification_Customization</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Contact.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>AccountId</field>
+            <value>
+                <elementReference>modified_account</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FirstName</field>
+            <value>
+                <elementReference>modified_contact_name.firstName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LastName</field>
+            <value>
+                <elementReference>modified_contact_name.lastName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Phone</field>
+            <value>
+                <elementReference>modified_phone.value</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Contact</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_Contact</name>
         <label>Update Contact</label>
-        <locationX>318</locationX>
-        <locationY>842</locationY>
+        <locationX>337</locationX>
+        <locationY>909</locationY>
         <connector>
             <targetReference>Confirm</targetReference>
         </connector>
@@ -444,8 +646,8 @@
     <screens>
         <name>Chatter_Success_Screen</name>
         <label>Chatter Success Screen</label>
-        <locationX>856</locationX>
-        <locationY>817</locationY>
+        <locationX>1054</locationX>
+        <locationY>863</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -460,8 +662,8 @@
     <screens>
         <name>Choose_Flow_Screen</name>
         <label>Choose Flow Screen</label>
-        <locationX>571</locationX>
-        <locationY>87</locationY>
+        <locationX>741</locationX>
+        <locationY>153</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -470,13 +672,15 @@
         </connector>
         <fields>
             <name>flowChoiceRadio</name>
-            <choiceReferences>chatterChoice</choiceReferences>
+            <choiceReferences>modifyChoice</choiceReferences>
             <choiceReferences>recordChoice</choiceReferences>
             <choiceReferences>screenChoice</choiceReferences>
             <choiceReferences>notificationChoice</choiceReferences>
             <choiceReferences>taskChoice</choiceReferences>
+            <choiceReferences>chatterChoice</choiceReferences>
+            <choiceReferences>confettiChoice</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>What would you like Flow to do?</fieldText>
+            <fieldText>What do you want Flow to do?</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>false</isRequired>
         </fields>
@@ -484,10 +688,27 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <name>Confetti</name>
+        <label>Confetti!</label>
+        <locationX>776</locationX>
+        <locationY>590</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>confetti_screen</name>
+            <extensionName>c:lightningWebComponentExample</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>Confirm</name>
         <label>Confirm</label>
-        <locationX>622</locationX>
-        <locationY>843</locationY>
+        <locationX>623</locationX>
+        <locationY>909</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -502,8 +723,8 @@
     <screens>
         <name>Contact_Info</name>
         <label>Contact Info</label>
-        <locationX>364</locationX>
-        <locationY>245</locationY>
+        <locationX>673</locationX>
+        <locationY>599</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -561,27 +782,142 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>LWC_Screen</name>
-        <label>LWC Screen</label>
-        <locationX>968</locationX>
-        <locationY>415</locationY>
+        <name>Interactive_Screen</name>
+        <label>Interactive Screen</label>
+        <locationX>921</locationX>
+        <locationY>724</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
-            <name>lwcScreenComponent</name>
+            <name>toggle_interactive_input</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Show Basic inputs</stringValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>name_interactive_input</name>
+            <extensionName>flowruntime:name</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>email_interactive_input</name>
+            <extensionName>flowruntime:email</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>readonly</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>phone_interactive_input</name>
+            <extensionName>flowruntime:phone</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>address_interactive_input</name>
+            <extensionName>flowruntime:address</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>password_interactive_input</name>
+            <fieldText>Password</fieldText>
+            <fieldType>PasswordField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>data_interactive_input</name>
+            <dataType>DateTime</dataType>
+            <fieldText>Date</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>currency_interactive_input</name>
+            <dataType>Currency</dataType>
+            <fieldText>Currency</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+        </fields>
+        <fields>
+            <name>textarea_interactive_input</name>
+            <fieldText>Long Text Area</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>url_interactive_input</name>
+            <extensionName>flowruntime:url</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>file_upload_interactive_input</name>
+            <extensionName>forceContent:fileUpload</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>File Upload</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordId</name>
+                <value>
+                    <elementReference>Assign_User_Id.Id</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>radio_interactive_input</name>
+            <choiceReferences>recordChoice</choiceReferences>
+            <choiceReferences>notificationChoice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Radio Button</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>image_interactive_input</name>
+            <extensionName>flowruntime:image</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>imageName</name>
+                <value>
+                    <stringValue>einstein_plane</stringValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>lwc_interactive_input</name>
             <extensionName>c:lightningWebComponentExample</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
+        <showHeader>true</showHeader>
     </screens>
     <screens>
         <name>Message_Screen</name>
         <label>Message Screen</label>
-        <locationX>856</locationX>
-        <locationY>505</locationY>
+        <locationX>1053</locationX>
+        <locationY>586</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -604,8 +940,8 @@
     <screens>
         <name>New_Task_Success_Screen</name>
         <label>New Task Success Screen</label>
-        <locationX>1248</locationX>
-        <locationY>130</locationY>
+        <locationX>1245</locationX>
+        <locationY>196</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -618,10 +954,44 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
+        <name>Notification_Customization</name>
+        <label>Notification Customization</label>
+        <locationX>1332</locationX>
+        <locationY>1005</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Id_To_Array</targetReference>
+        </connector>
+        <fields>
+            <name>notification_modification_title</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>Contact modified!</stringValue>
+            </defaultValue>
+            <fieldText>Title</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>notification_modification_body</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>Check this contact!</stringValue>
+            </defaultValue>
+            <fieldText>Body</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
         <name>Notification_Screen</name>
         <label>Notification Screen</label>
-        <locationX>1246</locationX>
-        <locationY>369</locationY>
+        <locationX>1330</locationX>
+        <locationY>310</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -653,8 +1023,8 @@
     <screens>
         <name>Notification_Success_Screen</name>
         <label>Notification Success Screen</label>
-        <locationX>1187</locationX>
-        <locationY>824</locationY>
+        <locationX>1329</locationX>
+        <locationY>671</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -669,8 +1039,8 @@
     <screens>
         <name>Record_Flow_Screen</name>
         <label>Record Flow Screen</label>
-        <locationX>560</locationX>
-        <locationY>245</locationY>
+        <locationX>673</locationX>
+        <locationY>392</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -685,21 +1055,142 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <start>
-        <locationX>50</locationX>
-        <locationY>87</locationY>
+    <screens>
+        <description>test</description>
+        <name>View_Modify_Record_Screen</name>
+        <label>View/Modify Record</label>
+        <locationX>1178</locationX>
+        <locationY>708</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_Example_Record</targetReference>
+            <targetReference>Send_Notification_Decission</targetReference>
+        </connector>
+        <fields>
+            <name>modify_contact_title</name>
+            <fieldText>&lt;p&gt;Modify this contact.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>test</name>
+            <fieldText>&lt;p&gt;Contact&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>modified_contact_name</name>
+            <extensionName>flowruntime:name</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>firstName</name>
+                <value>
+                    <elementReference>Get_Contact.FirstName</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>lastName</name>
+                <value>
+                    <elementReference>Get_Contact.LastName</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>modified_phone</name>
+            <extensionName>flowruntime:phone</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>Get_Contact.Phone</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>modified_account</name>
+            <choiceReferences>accounts</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Account</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>current_contact_account</name>
+            <fieldText>&lt;p&gt;This contact&#39;s current Account is:  {!Get_Current_Account_Name.Name}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>notification_alert</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Send</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Do you want to send a notification about this modification?</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <stringValue>Don&#39;t</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>156</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Get_Contact</targetReference>
         </connector>
     </start>
     <status>Draft</status>
     <subflows>
         <name>Convert_Id_To_Array</name>
         <label>Convert Id To Array</label>
-        <locationX>1187</locationX>
-        <locationY>518</locationY>
+        <locationX>1324</locationX>
+        <locationY>443</locationY>
         <connector>
             <targetReference>Send_Notification</targetReference>
+        </connector>
+        <flowName>Convert_ID_to_Array_of_IDs</flowName>
+        <inputAssignments>
+            <name>Id</name>
+            <value>
+                <elementReference>Assign_User_Id.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>ArrayOfUserId</assignToReference>
+            <name>ArrayOfId</name>
+        </outputAssignments>
+    </subflows>
+    <subflows>
+        <name>Id_To_Array</name>
+        <label>Id To Array</label>
+        <locationX>1458</locationX>
+        <locationY>1005</locationY>
+        <connector>
+            <targetReference>Notification_About_Modification</targetReference>
         </connector>
         <flowName>Convert_ID_to_Array_of_IDs</flowName>
         <inputAssignments>
@@ -737,20 +1228,6 @@
     </variables>
     <variables>
         <name>flow</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>message_to_send</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>notificationId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
