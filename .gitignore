@@ -6,6 +6,7 @@
 .sfdx/
 .localdevserver/
 
+
 # Logs
 logs
 *.log
