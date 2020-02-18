@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Schedule_a_Task</name>
+        <label>Schedule a Task</label>
+        <locationX>485</locationX>
+        <locationY>106</locationY>
+        <actionName>NewTask</actionName>
+        <actionType>quickAction</actionType>
+        <inputParameters>
+            <name>Subject</name>
+            <value>
+                <stringValue>Scheduled Task</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>OwnerId</name>
+            <value>
+                <elementReference>userId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <formulas>
+        <name>userId</name>
+        <dataType>String</dataType>
+        <expression>{!$User.Id}</expression>
+    </formulas>
+    <interviewLabel>Schedule a Task {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Schedule a Task</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>140</locationX>
+        <locationY>102</locationY>
+        <connector>
+            <targetReference>Wait_for_Action</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <waits>
+        <name>Wait_for_Action</name>
+        <label>Wait for Action</label>
+        <locationX>286</locationX>
+        <locationY>103</locationY>
+        <defaultConnectorLabel>Default Path</defaultConnectorLabel>
+        <waitEvents>
+            <name>Wait_One_Hour</name>
+            <conditionLogic>and</conditionLogic>
+            <connector>
+                <targetReference>Schedule_a_Task</targetReference>
+            </connector>
+            <eventType>AlarmEvent</eventType>
+            <inputParameters>
+                <name>AlarmTime</name>
+                <value>
+                    <elementReference>$Flow.CurrentDateTime</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+                <value>
+                    <stringValue>Hours</stringValue>
+                </value>
+            </inputParameters>
+            <label>Wait One Hour</label>
+        </waitEvents>
+    </waits>
+</Flow>
