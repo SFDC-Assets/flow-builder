@@ -592,7 +592,6 @@
             <choiceReferences>chatterChoice</choiceReferences>
             <choiceReferences>taskChoice</choiceReferences>
             <choiceReferences>eventChoice</choiceReferences>
-            <choiceReferences>confettiChoice</choiceReferences>
             <dataType>String</dataType>
             <fieldText>What do you want your Flow to do?</fieldText>
             <fieldType>MultiSelectCheckboxes</fieldType>
@@ -818,6 +817,45 @@
             </visibilityRule>
         </fields>
         <fields>
+            <name>level</name>
+            <choiceReferences>levels</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Level</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>budget</name>
+            <dataType>Currency</dataType>
+            <defaultValue>
+                <elementReference>getContact.Budget__c</elementReference>
+            </defaultValue>
+            <fieldText>Budget</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
             <name>address</name>
             <extensionName>flowruntime:address</extensionName>
             <fieldType>ComponentInstance</fieldType>
@@ -919,35 +957,6 @@
             </inputParameters>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
-        </fields>
-        <fields>
-            <name>level</name>
-            <choiceReferences>levels</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Level</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>advance_options_toggle.value</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
-            <name>budget</name>
-            <dataType>Currency</dataType>
-            <defaultValue>
-                <elementReference>getContact.Budget__c</elementReference>
-            </defaultValue>
-            <fieldText>Budget</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-            <scale>0</scale>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
