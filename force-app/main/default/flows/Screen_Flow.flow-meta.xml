@@ -87,15 +87,15 @@
             <targetReference>chatterSuccessScreen</targetReference>
         </connector>
         <inputParameters>
-            <name>text</name>
-            <value>
-                <elementReference>Send_a_Message_to_a_Contact</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
             <name>subjectNameOrId</name>
             <value>
                 <elementReference>userId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>message_text</elementReference>
             </value>
         </inputParameters>
     </actionCalls>
@@ -272,43 +272,6 @@
         </rules>
     </decisions>
     <decisions>
-        <name>confettiScreen</name>
-        <label>Show Confetti?</label>
-        <locationX>1444</locationX>
-        <locationY>474</locationY>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>confettiOutcomeTrue</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>flowActions</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <elementReference>confettiChoice</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Confetti</targetReference>
-            </connector>
-            <label>Yes</label>
-        </rules>
-        <rules>
-            <name>confettiOutcomeFalse</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>flowActions</leftValueReference>
-                <operator>NotEqualTo</operator>
-                <rightValue>
-                    <elementReference>confettiChoice</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>completeScreen</targetReference>
-            </connector>
-            <label>No</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>event_decission</name>
         <label>Create an Event</label>
         <locationX>1257</locationX>
@@ -340,7 +303,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>confettiScreen</targetReference>
+                <targetReference>completeScreen</targetReference>
             </connector>
             <label>No</label>
         </rules>
@@ -549,7 +512,7 @@
     </recordUpdates>
     <screens>
         <name>chatterMessageScreen</name>
-        <label>Message Screen</label>
+        <label>Post to Chatter Screen</label>
         <locationX>905</locationX>
         <locationY>687</locationY>
         <allowBack>true</allowBack>
@@ -559,13 +522,12 @@
             <targetReference>Post_to_Chatter</targetReference>
         </connector>
         <fields>
-            <name>Send_a_Message_to_a_Contact</name>
-            <dataType>String</dataType>
+            <name>message_text</name>
             <defaultValue>
-                <elementReference>chatter_message</elementReference>
+                <stringValue>This is my post to Chatter.</stringValue>
             </defaultValue>
-            <fieldText>Send a Message:</fieldText>
-            <fieldType>InputField</fieldType>
+            <fieldText>Post to Chatter</fieldText>
+            <fieldType>LargeTextArea</fieldType>
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
@@ -584,7 +546,7 @@
         </connector>
         <fields>
             <name>success_chatter_text</name>
-            <fieldText>&lt;p&gt;You just post a chatter with the message&lt;/p&gt;&lt;p&gt;{!Send_a_Message_to_a_Contact}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You can see it &lt;a href=&quot;/lightning/page/chatter&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255);&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;; color: rgb(51, 51, 51);&quot;&gt;You just posted to Chatter with the message: &lt;/span&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;{!message_text}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You can see it &lt;/span&gt;&lt;a href=&quot;/lightning/page/chatter&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255); font-size: 14px;&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -593,35 +555,24 @@
     <screens>
         <name>completeScreen</name>
         <label>Complete Screen</label>
-        <locationX>1642</locationX>
+        <locationX>1452</locationX>
         <locationY>472</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>complete_screen_text</name>
-            <fieldText>&lt;p&gt;Completed !&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Flow completed !&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Confetti</name>
-        <label>Confetti!</label>
-        <locationX>1452</locationX>
-        <locationY>277</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
         <fields>
-            <name>confettiComponent</name>
+            <name>completed_screen_confetti</name>
             <extensionName>c:lightningWebComponentExample</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
+        <showHeader>true</showHeader>
     </screens>
     <screens>
         <name>flowActionsScreen</name>
@@ -641,7 +592,6 @@
             <choiceReferences>chatterChoice</choiceReferences>
             <choiceReferences>taskChoice</choiceReferences>
             <choiceReferences>eventChoice</choiceReferences>
-            <choiceReferences>confettiChoice</choiceReferences>
             <dataType>String</dataType>
             <fieldText>What do you want your Flow to do?</fieldText>
             <fieldType>MultiSelectCheckboxes</fieldType>
@@ -659,11 +609,11 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>confettiScreen</targetReference>
+            <targetReference>completeScreen</targetReference>
         </connector>
         <fields>
             <name>event_success_text</name>
-            <fieldText>&lt;p&gt;You created a new Event!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Check it out &lt;a href=&quot;/lightning/o/Event/home&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255);&quot;&gt;here&lt;/a&gt;!&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You created a new Event!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Check it out &lt;/span&gt;&lt;a href=&quot;/lightning/o/Event/home&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255); font-size: 14px;&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;!&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -682,7 +632,7 @@
         </connector>
         <fields>
             <name>success_new_task_text</name>
-            <fieldText>&lt;p&gt;You just created a new task for a contact.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Check it &lt;a href=&quot;/lightning/o/Task/home&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255);&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You just created a new task for a contact.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Check it &lt;/span&gt;&lt;a href=&quot;/lightning/o/Task/home&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255); font-size: 14px;&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -707,6 +657,9 @@
         <fields>
             <name>notification_subject</name>
             <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>My notification</stringValue>
+            </defaultValue>
             <fieldText>Subject</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -714,6 +667,9 @@
         <fields>
             <name>notification_body</name>
             <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>This is my notification message.</stringValue>
+            </defaultValue>
             <fieldText>Body</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -734,7 +690,7 @@
         </connector>
         <fields>
             <name>ViewModifyRecord_SuccessText</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255);&quot;&gt;The contact {!getContact.FirstName} &lt;/span&gt;&lt;span style=&quot;color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255); font-size: 10.5625px;&quot;&gt;{!getContact.LastName}&lt;/span&gt;&lt;span style=&quot;color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255);&quot;&gt; was modified!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;/{!getContact.Id}&quot; target=&quot;_blank&quot;&gt;Go to the record.&lt;/a&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-family: monospace; color: rgb(30, 30, 30); font-size: 14px;&quot;&gt;The contact {!getContact.FirstName} {!getContact.LastName} was modified!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;/{!getContact.Id}&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px;&quot;&gt;Go to the record.&lt;/a&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -861,6 +817,45 @@
             </visibilityRule>
         </fields>
         <fields>
+            <name>level</name>
+            <choiceReferences>levels</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Level</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>budget</name>
+            <dataType>Currency</dataType>
+            <defaultValue>
+                <elementReference>getContact.Budget__c</elementReference>
+            </defaultValue>
+            <fieldText>Budget</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
             <name>address</name>
             <extensionName>flowruntime:address</extensionName>
             <fieldType>ComponentInstance</fieldType>
@@ -908,13 +903,13 @@
                 <name>province</name>
             </outputParameters>
             <outputParameters>
-                <assignToReference>getContact.MailingCountry</assignToReference>
-                <name>country</name>
-            </outputParameters>
-            <outputParameters>
                 <assignToReference>getContact.MailingPostalCode</assignToReference>
                 <name>postalCode</name>
             </outputParameters>
+            <outputParameters>
+                <assignToReference>getContact.MailingCountry</assignToReference>
+                <name>country</name>
+            </outputParameters>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -927,33 +922,41 @@
             </visibilityRule>
         </fields>
         <fields>
-            <name>level</name>
-            <choiceReferences>levels</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Level</fieldText>
-            <fieldType>DropdownBox</fieldType>
+            <name>address_map</name>
+            <extensionName>c:lwcMap</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>city</name>
+                <value>
+                    <elementReference>getContact.MailingCity</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>country</name>
+                <value>
+                    <elementReference>getContact.MailingCountry</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>postalCode</name>
+                <value>
+                    <elementReference>getContact.MailingPostalCode</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>state</name>
+                <value>
+                    <elementReference>getContact.MailingState</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>street</name>
+                <value>
+                    <elementReference>getContact.MailingStreet</elementReference>
+                </value>
+            </inputParameters>
             <isRequired>true</isRequired>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>advance_options_toggle.value</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
-            <name>budget</name>
-            <dataType>Currency</dataType>
-            <defaultValue>
-                <elementReference>getContact.Budget__c</elementReference>
-            </defaultValue>
-            <fieldText>Budget</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-            <scale>0</scale>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -1017,16 +1020,5 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Contact</objectType>
-    </variables>
-    <variables>
-        <name>test</name>
-        <dataType>Number</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <scale>2</scale>
-        <value>
-            <numberValue>23.0</numberValue>
-        </value>
     </variables>
 </Flow>
