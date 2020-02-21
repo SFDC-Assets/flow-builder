@@ -166,6 +166,13 @@
                 <elementReference>budget</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>getContact.Age__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>age.value</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Update_Contact</targetReference>
         </connector>
@@ -845,6 +852,35 @@
                 <assignToReference>getContact.Phone</assignToReference>
                 <name>value</name>
             </outputParameters>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>age</name>
+            <extensionName>flowruntime:slider</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Age</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>getContact.Age__c</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
