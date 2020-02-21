@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Create_an_Event</name>
         <label>Create an Event</label>
-        <locationX>1265</locationX>
-        <locationY>879</locationY>
+        <locationX>1264</locationX>
+        <locationY>868</locationY>
         <actionName>NewEvent</actionName>
         <actionType>quickAction</actionType>
         <connector>
@@ -38,8 +38,8 @@
     <actionCalls>
         <name>New_Task</name>
         <label>New Task</label>
-        <locationX>1072</locationX>
-        <locationY>114</locationY>
+        <locationX>1069</locationX>
+        <locationY>84</locationY>
         <actionName>NewTask</actionName>
         <actionType>quickAction</actionType>
         <connector>
@@ -103,11 +103,11 @@
         <name>Send_Notification</name>
         <label>Send Notification</label>
         <locationX>905</locationX>
-        <locationY>280</locationY>
+        <locationY>213</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
         <connector>
-            <targetReference>chatterDecision</targetReference>
+            <targetReference>Notification_Success_Screen</targetReference>
         </connector>
         <inputParameters>
             <name>customNotifTypeId</name>
@@ -143,8 +143,8 @@
     <assignments>
         <name>Assign_Fields_to_Contact</name>
         <label>Assign Fields to Contact</label>
-        <locationX>725</locationX>
-        <locationY>866</locationY>
+        <locationX>724</locationX>
+        <locationY>867</locationY>
         <assignmentItems>
             <assignToReference>getContact.Birthdate</assignToReference>
             <operator>Assign</operator>
@@ -238,7 +238,7 @@
         <name>chatterDecision</name>
         <label>Post to Chatter?</label>
         <locationX>897</locationX>
-        <locationY>468</locationY>
+        <locationY>464</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>chatterOutcomeTrue</name>
@@ -275,7 +275,7 @@
         <name>event_decission</name>
         <label>Create an Event</label>
         <locationX>1257</locationX>
-        <locationY>475</locationY>
+        <locationY>465</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>eventOutcomeTrue</name>
@@ -312,7 +312,7 @@
         <name>notificationDecision</name>
         <label>Send a Notification?</label>
         <locationX>716</locationX>
-        <locationY>466</locationY>
+        <locationY>462</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>notificationOutcomeTrue</name>
@@ -348,8 +348,8 @@
     <decisions>
         <name>recordDecision</name>
         <label>View/Modify a Record?</label>
-        <locationX>536</locationX>
-        <locationY>464</locationY>
+        <locationX>535</locationX>
+        <locationY>460</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>recordOutcomeTrue</name>
@@ -386,7 +386,7 @@
         <name>taskDecision</name>
         <label>Create a Task?</label>
         <locationX>1063</locationX>
-        <locationY>471</locationY>
+        <locationY>465</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>taskOutcomeTrue</name>
@@ -450,12 +450,33 @@
     <recordLookups>
         <name>getContact</name>
         <label>Get the Most Recent Contact</label>
-        <locationX>543</locationX>
-        <locationY>680</locationY>
+        <locationX>542</locationX>
+        <locationY>681</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>recordViewScreen</targetReference>
         </connector>
+        <filters>
+            <field>FirstName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Ashley</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>MailingCity</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>MailingState</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>CA</stringValue>
+            </value>
+        </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Contact</object>
         <queriedFields>Id</queriedFields>
@@ -546,7 +567,7 @@
         </connector>
         <fields>
             <name>success_chatter_text</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;; color: rgb(51, 51, 51);&quot;&gt;You just posted to Chatter with the message: &lt;/span&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;{!message_text}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You can see it &lt;/span&gt;&lt;a href=&quot;/lightning/page/chatter&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255); font-size: 14px;&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;You&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;just&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;posted&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;the&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;following&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;message&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;to&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;Chatter&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt;: &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&quot;{!message_text}&quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You can see it &lt;/span&gt;&lt;a href=&quot;/lightning/page/chatter&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px; color: rgb(0, 68, 255);&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -556,13 +577,13 @@
         <name>completeScreen</name>
         <label>Complete Screen</label>
         <locationX>1452</locationX>
-        <locationY>472</locationY>
+        <locationY>463</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>complete_screen_text</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Flow completed !&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Flow completed!&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -577,8 +598,8 @@
     <screens>
         <name>flowActionsScreen</name>
         <label>Select Flow Actions</label>
-        <locationX>348</locationX>
-        <locationY>462</locationY>
+        <locationX>400</locationX>
+        <locationY>458</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -604,7 +625,7 @@
         <name>New_Event_Success_Screen</name>
         <label>New Event Success Screen</label>
         <locationX>1452</locationX>
-        <locationY>879</locationY>
+        <locationY>868</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -623,7 +644,7 @@
         <name>New_Task_Success_Screen</name>
         <label>New Task Success Screen</label>
         <locationX>1265</locationX>
-        <locationY>114</locationY>
+        <locationY>84</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -632,7 +653,7 @@
         </connector>
         <fields>
             <name>success_new_task_text</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You just created a new task for a contact.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Check it &lt;/span&gt;&lt;a href=&quot;/lightning/o/Task/home&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255); font-size: 14px;&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You just created a new task for a contact.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You can see it &lt;/span&gt;&lt;a href=&quot;/lightning/o/Task/home&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px; color: rgb(0, 68, 255);&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -642,7 +663,7 @@
         <name>Notification_Screen</name>
         <label>Notification Screen</label>
         <locationX>723</locationX>
-        <locationY>112</locationY>
+        <locationY>85</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -678,6 +699,25 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
+        <name>Notification_Success_Screen</name>
+        <label>Notification Success Screen</label>
+        <locationX>905</locationX>
+        <locationY>331</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>chatterDecision</targetReference>
+        </connector>
+        <fields>
+            <name>notification_success_screen_text</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;See the notification in your &lt;/span&gt;&lt;a href=&quot;/lightning/page/home&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px; color: rgb(0, 58, 255);&quot;&gt;home page&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
         <name>recordSuccessScreen</name>
         <label>View/Modify Record Success</label>
         <locationX>724</locationX>
@@ -690,7 +730,7 @@
         </connector>
         <fields>
             <name>ViewModifyRecord_SuccessText</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-family: monospace; color: rgb(30, 30, 30); font-size: 14px;&quot;&gt;The contact {!getContact.FirstName} {!getContact.LastName} was modified!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;/{!getContact.Id}&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px;&quot;&gt;Go to the record.&lt;/a&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); background-color: rgb(255, 255, 255);&quot;&gt;The&lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255);&quot;&gt; &lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); background-color: rgb(255, 255, 255);&quot;&gt;contact&lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255);&quot;&gt; &lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); background-color: rgb(255, 255, 255);&quot;&gt;{!getContact.FirstName} {!getContact.LastName&lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255);&quot;&gt;}&lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); background-color: rgb(255, 255, 255);&quot;&gt; was modified!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;/{!getContact.Id}&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px;&quot;&gt;Go to the record.&lt;/a&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -972,8 +1012,8 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>192</locationX>
-        <locationY>462</locationY>
+        <locationX>275</locationX>
+        <locationY>458</locationY>
         <connector>
             <targetReference>flowActionsScreen</targetReference>
         </connector>
@@ -983,7 +1023,7 @@
         <name>Convert_Id_To_Array</name>
         <label>Convert Id To Array</label>
         <locationX>905</locationX>
-        <locationY>112</locationY>
+        <locationY>84</locationY>
         <connector>
             <targetReference>Send_Notification</targetReference>
         </connector>
