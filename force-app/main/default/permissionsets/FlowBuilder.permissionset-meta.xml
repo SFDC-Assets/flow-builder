@@ -2,6 +2,16 @@
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Budget__c</field>
+        <readable>true</readable>   
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Age__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Assigned_Training__c.Complete__c</field>
         <readable>true</readable>
     </fieldPermissions>

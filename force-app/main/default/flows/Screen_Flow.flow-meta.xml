@@ -1,15 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <actionCalls>
+        <name>Create_an_Event</name>
+        <label>Create an Event</label>
+        <locationX>1264</locationX>
+        <locationY>868</locationY>
+        <actionName>NewEvent</actionName>
+        <actionType>quickAction</actionType>
+        <connector>
+            <targetReference>New_Event_Success_Screen</targetReference>
+        </connector>
+        <inputParameters>
+            <name>OwnerId</name>
+            <value>
+                <elementReference>userId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>StartDateTime</name>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>EndDateTime</name>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>Subject</name>
+            <value>
+                <stringValue>New Event</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
     <actionCalls>
         <name>New_Task</name>
         <label>New Task</label>
-        <locationX>1115</locationX>
-        <locationY>196</locationY>
+        <locationX>1069</locationX>
+        <locationY>84</locationY>
         <actionName>NewTask</actionName>
         <actionType>quickAction</actionType>
         <connector>
             <targetReference>New_Task_Success_Screen</targetReference>
         </connector>
+        <inputParameters>
+            <name>contextId</name>
+            <value>
+                <elementReference>userId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>Subject</name>
+            <value>
+                <stringValue>New Task, Very Important.</stringValue>
+            </value>
+        </inputParameters>
         <inputParameters>
             <name>ActivityDate</name>
             <value>
@@ -19,19 +66,7 @@
         <inputParameters>
             <name>OwnerId</name>
             <value>
-                <elementReference>Assign_User_Id.Id</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>contextId</name>
-            <value>
-                <elementReference>recordId.Id</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>Subject</name>
-            <value>
-                <stringValue>New Task, Very Important.</stringValue>
+                <elementReference>userId</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -42,71 +77,33 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
-        <name>Notification_About_Modification</name>
-        <label>Notification About Modification</label>
-        <locationX>1583</locationX>
-        <locationY>1005</locationY>
-        <actionName>customNotificationAction</actionName>
-        <actionType>customNotificationAction</actionType>
-        <inputParameters>
-            <name>customNotifTypeId</name>
-            <value>
-                <elementReference>Get_Notification_Id.Id</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>targetId</name>
-            <value>
-                <elementReference>Get_Contact.Id</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>body</name>
-            <value>
-                <elementReference>notification_modification_body</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>recipientIds</name>
-            <value>
-                <elementReference>ArrayOfUserId</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>title</name>
-            <value>
-                <elementReference>notification_modification_title</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
-    <actionCalls>
         <name>Post_to_Chatter</name>
         <label>Post to Chatter</label>
-        <locationX>1054</locationX>
-        <locationY>735</locationY>
+        <locationX>905</locationX>
+        <locationY>869</locationY>
         <actionName>chatterPost</actionName>
         <actionType>chatterPost</actionType>
         <connector>
-            <targetReference>Chatter_Success_Screen</targetReference>
+            <targetReference>chatterSuccessScreen</targetReference>
         </connector>
-        <inputParameters>
-            <name>text</name>
-            <value>
-                <elementReference>Send_a_Message_to_a_Contact</elementReference>
-            </value>
-        </inputParameters>
         <inputParameters>
             <name>subjectNameOrId</name>
             <value>
-                <elementReference>recordId.Id</elementReference>
+                <elementReference>userId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>message_text</elementReference>
             </value>
         </inputParameters>
     </actionCalls>
     <actionCalls>
         <name>Send_Notification</name>
         <label>Send Notification</label>
-        <locationX>1325</locationX>
-        <locationY>563</locationY>
+        <locationX>905</locationX>
+        <locationY>213</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
         <connector>
@@ -115,13 +112,13 @@
         <inputParameters>
             <name>customNotifTypeId</name>
             <value>
-                <elementReference>Get_Notification_Id.Id</elementReference>
+                <elementReference>getNotification.Id</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
-            <name>recipientIds</name>
+            <name>targetId</name>
             <value>
-                <elementReference>ArrayOfUserId</elementReference>
+                <elementReference>userId</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -131,44 +128,49 @@
             </value>
         </inputParameters>
         <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>ArrayOfUserId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
             <name>body</name>
             <value>
                 <elementReference>notification_body</elementReference>
             </value>
         </inputParameters>
-        <inputParameters>
-            <name>targetId</name>
-            <value>
-                <elementReference>recordId.Id</elementReference>
-            </value>
-        </inputParameters>
     </actionCalls>
     <assignments>
-        <name>Flow_Assignment</name>
-        <label>Flow Assignment</label>
-        <locationX>886</locationX>
-        <locationY>153</locationY>
+        <name>Assign_Fields_to_Contact</name>
+        <label>Assign Fields to Contact</label>
+        <locationX>724</locationX>
+        <locationY>867</locationY>
         <assignmentItems>
-            <assignToReference>flow</assignToReference>
+            <assignToReference>getContact.Birthdate</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>flowChoiceRadio</elementReference>
+                <elementReference>birthdate</elementReference>
             </value>
         </assignmentItems>
-        <connector>
-            <targetReference>Decide_a_Flow</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Set_Contact_ID</name>
-        <label>Set Contact ID</label>
-        <locationX>225</locationX>
-        <locationY>746</locationY>
         <assignmentItems>
-            <assignToReference>contact.Id</assignToReference>
+            <assignToReference>getContact.Level__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Find_a_Match.Id</elementReference>
+                <elementReference>level</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>getContact.Budget__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>budget</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>getContact.Age__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>age.value</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -192,6 +194,14 @@
         </value>
     </choices>
     <choices>
+        <name>eventChoice</name>
+        <choiceText>Create an Event</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Create an Event</stringValue>
+        </value>
+    </choices>
+    <choices>
         <name>modifyChoice</name>
         <choiceText>View/Modify Record</choiceText>
         <dataType>String</dataType>
@@ -209,10 +219,10 @@
     </choices>
     <choices>
         <name>recordChoice</name>
-        <choiceText>Create/Modify a Record</choiceText>
+        <choiceText>View/Modify a Record</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>Create/Modify a Record</stringValue>
+            <stringValue>View/Modify a Record</stringValue>
         </value>
     </choices>
     <choices>
@@ -232,76 +242,164 @@
         </value>
     </choices>
     <decisions>
-        <name>Decide_a_Flow</name>
-        <label>Decide a Flow</label>
-        <locationX>878</locationX>
-        <locationY>342</locationY>
+        <name>chatterDecision</name>
+        <label>Post to Chatter?</label>
+        <locationX>897</locationX>
+        <locationY>464</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Record_Flow</name>
+            <name>chatterOutcomeTrue</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>flow</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <elementReference>recordChoice</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Record_Flow_Screen</targetReference>
-            </connector>
-            <label>Create/Modify a Record</label>
-        </rules>
-        <rules>
-            <name>Chatter_Flow</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>flow</leftValueReference>
+                <leftValueReference>flowActions</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>chatterChoice</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Message_Screen</targetReference>
+                <targetReference>chatterMessageScreen</targetReference>
             </connector>
-            <label>Post to Chatter</label>
+            <label>Yes</label>
         </rules>
         <rules>
-            <name>LWC_Flow</name>
+            <name>chatterOutcomeFalse</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>flow</leftValueReference>
-                <operator>EqualTo</operator>
+                <leftValueReference>flowActions</leftValueReference>
+                <operator>NotEqualTo</operator>
                 <rightValue>
-                    <elementReference>screenChoice</elementReference>
+                    <elementReference>chatterChoice</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Interactive_Screen</targetReference>
+                <targetReference>taskDecision</targetReference>
             </connector>
-            <label>Display an Interactive Screen</label>
+            <label>No</label>
         </rules>
+    </decisions>
+    <decisions>
+        <name>event_decission</name>
+        <label>Create an Event</label>
+        <locationX>1257</locationX>
+        <locationY>465</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Notification_Flow</name>
+            <name>eventOutcomeTrue</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>flow</leftValueReference>
+                <leftValueReference>flowActions</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>eventChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_an_Event</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+        <rules>
+            <name>eventOutcomeFalse</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>flowActions</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>eventChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>completeScreen</targetReference>
+            </connector>
+            <label>No</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>notificationDecision</name>
+        <label>Send a Notification?</label>
+        <locationX>716</locationX>
+        <locationY>462</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>notificationOutcomeTrue</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>flowActions</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>notificationChoice</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Notification_Screen</targetReference>
+                <targetReference>getNotification</targetReference>
             </connector>
-            <label>Send a Notification</label>
+            <label>Yes</label>
         </rules>
         <rules>
-            <name>Create_Task_Flow</name>
+            <name>notificationOutcomeFalse</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>flow</leftValueReference>
+                <leftValueReference>flowActions</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>notificationChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>chatterDecision</targetReference>
+            </connector>
+            <label>No</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>recordDecision</name>
+        <label>View/Modify a Record?</label>
+        <locationX>535</locationX>
+        <locationY>460</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>recordOutcomeTrue</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>flowActions</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>modifyChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>getContact</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+        <rules>
+            <name>recordOutcomeFalse</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>flowActions</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>modifyChoice</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>notificationDecision</targetReference>
+            </connector>
+            <label>No</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>taskDecision</name>
+        <label>Create a Task?</label>
+        <locationX>1063</locationX>
+        <locationY>465</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>taskOutcomeTrue</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>flowActions</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>taskChoice</elementReference>
@@ -310,108 +408,36 @@
             <connector>
                 <targetReference>New_Task</targetReference>
             </connector>
-            <label>Create a Task</label>
+            <label>Yes</label>
         </rules>
         <rules>
-            <name>View_Modify_Record</name>
+            <name>taskOutcomeFalse</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>flow</leftValueReference>
-                <operator>EqualTo</operator>
+                <leftValueReference>flowActions</leftValueReference>
+                <operator>NotEqualTo</operator>
                 <rightValue>
-                    <elementReference>modifyChoice</elementReference>
+                    <elementReference>taskChoice</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>View_Modify_Record_Screen</targetReference>
+                <targetReference>event_decission</targetReference>
             </connector>
-            <label>View/Modify Record</label>
-        </rules>
-        <rules>
-            <name>Throw_Confetti</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>flow</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <elementReference>confettiChoice</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Confetti</targetReference>
-            </connector>
-            <label>Throw Confetti!</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Send_Notification_Decission</name>
-        <label>Send Notification?</label>
-        <locationX>1171</locationX>
-        <locationY>871</locationY>
-        <defaultConnectorLabel>Don&#39;t</defaultConnectorLabel>
-        <rules>
-            <name>Send</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>notification_alert.value</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Modify_Contact</targetReference>
-            </connector>
-            <label>Send</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Update_or_Create</name>
-        <label>Update or Create?</label>
-        <locationX>458</locationX>
-        <locationY>753</locationY>
-        <defaultConnector>
-            <targetReference>Create_Contact</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Create New</defaultConnectorLabel>
-        <rules>
-            <name>Update_Existing</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>update_toggle.value</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Find_a_Match</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Set_Contact_ID</targetReference>
-            </connector>
-            <label>Update Existing</label>
+            <label>No</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
-        <name>accounts</name>
-        <dataType>String</dataType>
-        <displayField>Name</displayField>
-        <object>Account</object>
-        <outputAssignments>
-            <assignToReference>contact.AccountId</assignToReference>
-            <field>Id</field>
-        </outputAssignments>
-        <valueField>Id</valueField>
+        <name>levels</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Level__c</picklistField>
+        <picklistObject>Contact</picklistObject>
     </dynamicChoiceSets>
     <formulas>
-        <name>created_or_updated</name>
+        <name>userId</name>
         <dataType>String</dataType>
-        <expression>IF({!Create_Contact}, &quot;created&quot;, &quot;updated&quot;)</expression>
+        <expression>{!$User.Id}</expression>
     </formulas>
     <interviewLabel>Screen Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Screen Flow</label>
@@ -428,157 +454,67 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
-    <recordCreates>
-        <name>Create_Contact</name>
-        <label>Create Contact</label>
-        <locationX>653</locationX>
-        <locationY>754</locationY>
-        <connector>
-            <targetReference>Confirm</targetReference>
-        </connector>
-        <inputReference>contact</inputReference>
-    </recordCreates>
     <recordLookups>
-        <name>Assign_Example_Record</name>
-        <label>Assign Example Record</label>
-        <locationX>379</locationX>
-        <locationY>153</locationY>
+        <name>getContact</name>
+        <label>Get the Most Recent Contact</label>
+        <locationX>542</locationX>
+        <locationY>681</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Assign_User_Id</targetReference>
+            <targetReference>recordViewScreen</targetReference>
         </connector>
         <filters>
             <field>FirstName</field>
-            <operator>EqualTo</operator>
+            <operator>NotEqualTo</operator>
             <value>
-                <stringValue>Example</stringValue>
-            </value>
-        </filters>
-        <object>Contact</object>
-        <outputReference>recordId</outputReference>
-        <queriedFields>Id</queriedFields>
-        <queriedFields>AccountId</queriedFields>
-    </recordLookups>
-    <recordLookups>
-        <name>Assign_User_Id</name>
-        <label>Assign User Id</label>
-        <locationX>493</locationX>
-        <locationY>153</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Get_Notification_Id</targetReference>
-        </connector>
-        <filters>
-            <field>FirstName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>User</stringValue>
+                <stringValue>Ashley</stringValue>
             </value>
         </filters>
         <filters>
-            <field>LastName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>User</stringValue>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>User</object>
-        <queriedFields>Id</queriedFields>
-        <queriedFields>AccountId</queriedFields>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Find_a_Match</name>
-        <label>Find a Match</label>
-        <locationX>465</locationX>
-        <locationY>599</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Update_or_Create</targetReference>
-        </connector>
-        <filters>
-            <field>FirstName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>contact.FirstName</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>LastName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>contact.LastName</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Contact</object>
-        <queriedFields>Id</queriedFields>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_Contact</name>
-        <label>Get Contact</label>
-        <locationX>154</locationX>
-        <locationY>153</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Get_Current_Account_Name</targetReference>
-        </connector>
-        <filters>
-            <field>AccountId</field>
+            <field>MailingCity</field>
             <operator>IsNull</operator>
             <value>
                 <booleanValue>false</booleanValue>
             </value>
         </filters>
         <filters>
-            <field>FirstName</field>
+            <field>MailingState</field>
             <operator>NotEqualTo</operator>
             <value>
-                <stringValue>Example</stringValue>
+                <stringValue>CA</stringValue>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Contact</object>
         <queriedFields>Id</queriedFields>
-        <queriedFields>AccountId</queriedFields>
-        <queriedFields>Name</queriedFields>
         <queriedFields>FirstName</queriedFields>
         <queriedFields>LastName</queriedFields>
+        <queriedFields>AccountId</queriedFields>
         <queriedFields>Phone</queriedFields>
+        <queriedFields>Description</queriedFields>
+        <queriedFields>Email</queriedFields>
+        <queriedFields>Birthdate</queriedFields>
+        <queriedFields>MailingCity</queriedFields>
+        <queriedFields>MailingCountry</queriedFields>
+        <queriedFields>MailingState</queriedFields>
+        <queriedFields>MailingStreet</queriedFields>
+        <queriedFields>MailingAddress</queriedFields>
+        <queriedFields>MailingPostalCode</queriedFields>
+        <queriedFields>Level__c</queriedFields>
+        <queriedFields>Budget__c</queriedFields>
+        <queriedFields>Age__c</queriedFields>
+        <sortField>LastModifiedDate</sortField>
+        <sortOrder>Desc</sortOrder>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>Get_Current_Account_Name</name>
-        <label>Get Current Account Name</label>
-        <locationX>260</locationX>
-        <locationY>153</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Assign_Example_Record</targetReference>
-        </connector>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Get_Contact.AccountId</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Account</object>
-        <queriedFields>Id</queriedFields>
-        <queriedFields>Name</queriedFields>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_Notification_Id</name>
+        <name>getNotification</name>
         <label>Get Notification Id</label>
-        <locationX>611</locationX>
-        <locationY>153</locationY>
+        <locationX>723</locationX>
+        <locationY>277</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Choose_Flow_Screen</targetReference>
+            <targetReference>Notification_Screen</targetReference>
         </connector>
         <filters>
             <field>DeveloperName</field>
@@ -593,331 +529,20 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <name>Modify_Contact</name>
-        <label>Modify Contact</label>
-        <locationX>1327</locationX>
-        <locationY>871</locationY>
-        <connector>
-            <targetReference>Notification_Customization</targetReference>
-        </connector>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Get_Contact.Id</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>AccountId</field>
-            <value>
-                <elementReference>modified_account</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>FirstName</field>
-            <value>
-                <elementReference>modified_contact_name.firstName</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>LastName</field>
-            <value>
-                <elementReference>modified_contact_name.lastName</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Phone</field>
-            <value>
-                <elementReference>modified_phone.value</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Contact</object>
-    </recordUpdates>
-    <recordUpdates>
         <name>Update_Contact</name>
         <label>Update Contact</label>
-        <locationX>337</locationX>
-        <locationY>909</locationY>
+        <locationX>725</locationX>
+        <locationY>737</locationY>
         <connector>
-            <targetReference>Confirm</targetReference>
+            <targetReference>recordSuccessScreen</targetReference>
         </connector>
-        <inputReference>contact</inputReference>
+        <inputReference>getContact</inputReference>
     </recordUpdates>
     <screens>
-        <name>Chatter_Success_Screen</name>
-        <label>Chatter Success Screen</label>
-        <locationX>1054</locationX>
-        <locationY>863</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>success_chatter_text</name>
-            <fieldText>&lt;p&gt;You just post a chatter with the message&lt;/p&gt;&lt;p&gt;{!Send_a_Message_to_a_Contact}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You can see it &lt;a href=&quot;/{!recordId}&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255);&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Choose_Flow_Screen</name>
-        <label>Choose Flow Screen</label>
-        <locationX>741</locationX>
-        <locationY>153</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Flow_Assignment</targetReference>
-        </connector>
-        <fields>
-            <name>flowChoiceRadio</name>
-            <choiceReferences>modifyChoice</choiceReferences>
-            <choiceReferences>recordChoice</choiceReferences>
-            <choiceReferences>screenChoice</choiceReferences>
-            <choiceReferences>notificationChoice</choiceReferences>
-            <choiceReferences>taskChoice</choiceReferences>
-            <choiceReferences>chatterChoice</choiceReferences>
-            <choiceReferences>confettiChoice</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>What do you want Flow to do?</fieldText>
-            <fieldType>RadioButtons</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
-        <name>Confetti</name>
-        <label>Confetti!</label>
-        <locationX>776</locationX>
-        <locationY>590</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>confetti_screen</name>
-            <extensionName>c:lightningWebComponentExample</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
-        <name>Confirm</name>
-        <label>Confirm</label>
-        <locationX>623</locationX>
-        <locationY>909</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>confirmation_message</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-family: monospace; color: rgb(30, 30, 30);&quot;&gt;The contact {!contact.FirstName} &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-family: monospace; color: rgb(30, 30, 30); font-size: 10.5625px;&quot;&gt;{!contact.LastName}&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-family: monospace; color: rgb(30, 30, 30);&quot;&gt; was {!created_or_updated}!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;/{!contact.Id}&quot; target=&quot;_blank&quot;&gt;Go to the record.&lt;/a&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Contact_Info</name>
-        <label>Contact Info</label>
-        <locationX>673</locationX>
-        <locationY>599</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Find_a_Match</targetReference>
-        </connector>
-        <fields>
-            <name>contactName</name>
-            <extensionName>flowruntime:name</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>contact.FirstName</assignToReference>
-                <name>firstName</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>contact.LastName</assignToReference>
-                <name>lastName</name>
-            </outputParameters>
-        </fields>
-        <fields>
-            <name>Account</name>
-            <choiceReferences>accounts</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Account</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>update_toggle</name>
-            <extensionName>flowruntime:toggle</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>label</name>
-                <value>
-                    <stringValue>If this contact already exists, update the existing record.</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>messageToggleActive</name>
-                <value>
-                    <stringValue>Update existing</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>messageToggleInactive</name>
-                <value>
-                    <stringValue>Create other contact</stringValue>
-                </value>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Interactive_Screen</name>
-        <label>Interactive Screen</label>
-        <locationX>921</locationX>
-        <locationY>724</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>toggle_interactive_input</name>
-            <extensionName>flowruntime:toggle</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>label</name>
-                <value>
-                    <stringValue>Show Basic inputs</stringValue>
-                </value>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-        </fields>
-        <fields>
-            <name>name_interactive_input</name>
-            <extensionName>flowruntime:name</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>email_interactive_input</name>
-            <extensionName>flowruntime:email</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>readonly</name>
-                <value>
-                    <booleanValue>false</booleanValue>
-                </value>
-            </inputParameters>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>phone_interactive_input</name>
-            <extensionName>flowruntime:phone</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>address_interactive_input</name>
-            <extensionName>flowruntime:address</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>password_interactive_input</name>
-            <fieldText>Password</fieldText>
-            <fieldType>PasswordField</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>data_interactive_input</name>
-            <dataType>DateTime</dataType>
-            <fieldText>Date</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>currency_interactive_input</name>
-            <dataType>Currency</dataType>
-            <fieldText>Currency</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-            <scale>0</scale>
-        </fields>
-        <fields>
-            <name>textarea_interactive_input</name>
-            <fieldText>Long Text Area</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>url_interactive_input</name>
-            <extensionName>flowruntime:url</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>file_upload_interactive_input</name>
-            <extensionName>forceContent:fileUpload</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>label</name>
-                <value>
-                    <stringValue>File Upload</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>recordId</name>
-                <value>
-                    <elementReference>Assign_User_Id.Id</elementReference>
-                </value>
-            </inputParameters>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>radio_interactive_input</name>
-            <choiceReferences>recordChoice</choiceReferences>
-            <choiceReferences>notificationChoice</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Radio Button</fieldText>
-            <fieldType>RadioButtons</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>image_interactive_input</name>
-            <extensionName>flowruntime:image</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>imageName</name>
-                <value>
-                    <stringValue>einstein_plane</stringValue>
-                </value>
-            </inputParameters>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>lwc_interactive_input</name>
-            <extensionName>c:lightningWebComponentExample</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Message_Screen</name>
-        <label>Message Screen</label>
-        <locationX>1053</locationX>
-        <locationY>586</locationY>
+        <name>chatterMessageScreen</name>
+        <label>Post to Chatter Screen</label>
+        <locationX>905</locationX>
+        <locationY>687</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -925,14 +550,99 @@
             <targetReference>Post_to_Chatter</targetReference>
         </connector>
         <fields>
-            <name>Send_a_Message_to_a_Contact</name>
-            <dataType>String</dataType>
+            <name>message_text</name>
             <defaultValue>
-                <elementReference>chatter_message</elementReference>
+                <stringValue>This is my post to Chatter.</stringValue>
             </defaultValue>
-            <fieldText>Send a Message to a Contact:</fieldText>
-            <fieldType>InputField</fieldType>
+            <fieldText>Post to Chatter</fieldText>
+            <fieldType>LargeTextArea</fieldType>
             <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>chatterSuccessScreen</name>
+        <label>Chatter Success Screen</label>
+        <locationX>1071</locationX>
+        <locationY>869</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>taskDecision</targetReference>
+        </connector>
+        <fields>
+            <name>success_chatter_text</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;You&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;just&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;posted&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;the&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;following&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;message&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;to&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51);&quot;&gt;Chatter&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 14px; color: rgb(51, 51, 51); font-family: &amp;quot;Salesforce Sans Web&amp;quot;, sans-serif, &amp;quot;Quip Glyphs&amp;quot;;&quot;&gt;: &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&quot;{!message_text}&quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You can see it &lt;/span&gt;&lt;a href=&quot;/lightning/page/chatter&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px; color: rgb(0, 68, 255);&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>completeScreen</name>
+        <label>Complete Screen</label>
+        <locationX>1452</locationX>
+        <locationY>463</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>complete_screen_text</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Flow completed!&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>completed_screen_confetti</name>
+            <extensionName>c:lightningWebComponentExample</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>flowActionsScreen</name>
+        <label>Select Flow Actions</label>
+        <locationX>400</locationX>
+        <locationY>458</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>recordDecision</targetReference>
+        </connector>
+        <fields>
+            <name>flowActions</name>
+            <choiceReferences>modifyChoice</choiceReferences>
+            <choiceReferences>notificationChoice</choiceReferences>
+            <choiceReferences>chatterChoice</choiceReferences>
+            <choiceReferences>taskChoice</choiceReferences>
+            <choiceReferences>eventChoice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>What do you want your Flow to do?</fieldText>
+            <fieldType>MultiSelectCheckboxes</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>New_Event_Success_Screen</name>
+        <label>New Event Success Screen</label>
+        <locationX>1452</locationX>
+        <locationY>868</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>completeScreen</targetReference>
+        </connector>
+        <fields>
+            <name>event_success_text</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You created a new Event!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Check it out &lt;/span&gt;&lt;a href=&quot;/lightning/o/Event/home&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255); font-size: 14px;&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;!&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -940,49 +650,18 @@
     <screens>
         <name>New_Task_Success_Screen</name>
         <label>New Task Success Screen</label>
-        <locationX>1245</locationX>
-        <locationY>196</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>success_new_task_text</name>
-            <fieldText>&lt;p&gt;You just created a new task for a contact.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Check it &lt;span style=&quot;color: rgb(0, 68, 255);&quot;&gt;here&lt;/span&gt;.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Notification_Customization</name>
-        <label>Notification Customization</label>
-        <locationX>1332</locationX>
-        <locationY>1005</locationY>
+        <locationX>1265</locationX>
+        <locationY>84</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Id_To_Array</targetReference>
+            <targetReference>event_decission</targetReference>
         </connector>
         <fields>
-            <name>notification_modification_title</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <stringValue>Contact modified!</stringValue>
-            </defaultValue>
-            <fieldText>Title</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>notification_modification_body</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <stringValue>Check this contact!</stringValue>
-            </defaultValue>
-            <fieldText>Body</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <name>success_new_task_text</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You just created a new task for a contact.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You can see it &lt;/span&gt;&lt;a href=&quot;/lightning/o/Task/home&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px; color: rgb(0, 68, 255);&quot;&gt;here&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -990,8 +669,8 @@
     <screens>
         <name>Notification_Screen</name>
         <label>Notification Screen</label>
-        <locationX>1330</locationX>
-        <locationY>310</locationY>
+        <locationX>723</locationX>
+        <locationY>85</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1006,6 +685,9 @@
         <fields>
             <name>notification_subject</name>
             <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>My notification</stringValue>
+            </defaultValue>
             <fieldText>Subject</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -1013,6 +695,9 @@
         <fields>
             <name>notification_body</name>
             <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>This is my notification message.</stringValue>
+            </defaultValue>
             <fieldText>Body</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -1023,125 +708,124 @@
     <screens>
         <name>Notification_Success_Screen</name>
         <label>Notification Success Screen</label>
-        <locationX>1329</locationX>
-        <locationY>671</locationY>
+        <locationX>905</locationX>
+        <locationY>331</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
+        <connector>
+            <targetReference>chatterDecision</targetReference>
+        </connector>
         <fields>
             <name>notification_success_screen_text</name>
-            <fieldText>&lt;p&gt;You just send a Notification!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Check your notifications in your &lt;a href=&quot;/lightning/page/home&quot; target=&quot;_blank&quot; style=&quot;color: rgb(0, 68, 255);&quot;&gt;Home&lt;/a&gt;.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;See the notification in your &lt;/span&gt;&lt;a href=&quot;/lightning/page/home&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px; color: rgb(0, 58, 255);&quot;&gt;home page&lt;/a&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Record_Flow_Screen</name>
-        <label>Record Flow Screen</label>
-        <locationX>673</locationX>
-        <locationY>392</locationY>
+        <name>recordSuccessScreen</name>
+        <label>View/Modify Record Success</label>
+        <locationX>724</locationX>
+        <locationY>590</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
-            <targetReference>Contact_Info</targetReference>
+            <targetReference>notificationDecision</targetReference>
         </connector>
         <fields>
-            <name>recordFlowScreenText</name>
-            <fieldText>&lt;p&gt;FLOW: {!recordChoice}&lt;/p&gt;</fieldText>
+            <name>ViewModifyRecord_SuccessText</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); background-color: rgb(255, 255, 255);&quot;&gt;The&lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255);&quot;&gt; &lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); background-color: rgb(255, 255, 255);&quot;&gt;contact&lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255);&quot;&gt; &lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); background-color: rgb(255, 255, 255);&quot;&gt;{!getContact.FirstName} {!getContact.LastName&lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); font-family: monospace; background-color: rgb(255, 255, 255);&quot;&gt;}&lt;/span&gt;&lt;span style=&quot;font-size: 14px; color: rgb(30, 30, 30); background-color: rgb(255, 255, 255);&quot;&gt; was modified!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;/{!getContact.Id}&quot; target=&quot;_blank&quot; style=&quot;font-size: 14px;&quot;&gt;Go to the record.&lt;/a&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <description>test</description>
-        <name>View_Modify_Record_Screen</name>
-        <label>View/Modify Record</label>
-        <locationX>1178</locationX>
-        <locationY>708</locationY>
+        <name>recordViewScreen</name>
+        <label>Contact Info</label>
+        <locationX>543</locationX>
+        <locationY>867</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
-            <targetReference>Send_Notification_Decission</targetReference>
+            <targetReference>Assign_Fields_to_Contact</targetReference>
         </connector>
         <fields>
-            <name>modify_contact_title</name>
-            <fieldText>&lt;p&gt;Modify this contact.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>test</name>
-            <fieldText>&lt;p&gt;Contact&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>modified_contact_name</name>
+            <name>contactName</name>
             <extensionName>flowruntime:name</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>firstName</name>
                 <value>
-                    <elementReference>Get_Contact.FirstName</elementReference>
+                    <elementReference>getContact.FirstName</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>lastName</name>
                 <value>
-                    <elementReference>Get_Contact.LastName</elementReference>
+                    <elementReference>getContact.LastName</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <outputParameters>
+                <assignToReference>getContact.FirstName</assignToReference>
+                <name>firstName</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>getContact.LastName</assignToReference>
+                <name>lastName</name>
+            </outputParameters>
         </fields>
         <fields>
-            <name>modified_phone</name>
-            <extensionName>flowruntime:phone</extensionName>
+            <name>email</name>
+            <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <elementReference>Get_Contact.Phone</elementReference>
+                    <elementReference>getContact.Email</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <outputParameters>
+                <assignToReference>getContact.Email</assignToReference>
+                <name>value</name>
+            </outputParameters>
         </fields>
         <fields>
-            <name>modified_account</name>
-            <choiceReferences>accounts</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Account</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
+            <name>birthdate</name>
+            <dataType>Date</dataType>
+            <defaultValue>
+                <elementReference>getContact.Birthdate</elementReference>
+            </defaultValue>
+            <fieldText>Birthdate</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>current_contact_account</name>
-            <fieldText>&lt;p&gt;This contact&#39;s current Account is:  {!Get_Current_Account_Name.Name}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>notification_alert</name>
+            <name>advance_options_toggle</name>
             <extensionName>flowruntime:toggle</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>messageToggleActive</name>
+                <name>label</name>
                 <value>
-                    <stringValue>Send</stringValue>
+                    <stringValue>Advanced Options</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>label</name>
+                <name>messageToggleActive</name>
                 <value>
-                    <stringValue>Do you want to send a notification about this modification?</stringValue>
+                    <stringValue>Show</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>messageToggleInactive</name>
                 <value>
-                    <stringValue>Don&#39;t</stringValue>
+                    <stringValue>Don&#39;t show</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1153,22 +837,229 @@
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
+        <fields>
+            <name>phone</name>
+            <extensionName>flowruntime:phone</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>getContact.Phone</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>getContact.Phone</assignToReference>
+                <name>value</name>
+            </outputParameters>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>age</name>
+            <extensionName>flowruntime:slider</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Age</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <elementReference>getContact.Age__c</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>level</name>
+            <choiceReferences>levels</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Level</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>budget</name>
+            <dataType>Currency</dataType>
+            <defaultValue>
+                <elementReference>getContact.Budget__c</elementReference>
+            </defaultValue>
+            <fieldText>Budget</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>address</name>
+            <extensionName>flowruntime:address</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>city</name>
+                <value>
+                    <elementReference>getContact.MailingCity</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>country</name>
+                <value>
+                    <elementReference>getContact.MailingCountry</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>province</name>
+                <value>
+                    <elementReference>getContact.MailingState</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>street</name>
+                <value>
+                    <elementReference>getContact.MailingStreet</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>postalCode</name>
+                <value>
+                    <elementReference>getContact.MailingPostalCode</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>getContact.MailingCity</assignToReference>
+                <name>city</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>getContact.MailingStreet</assignToReference>
+                <name>street</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>getContact.MailingState</assignToReference>
+                <name>province</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>getContact.MailingPostalCode</assignToReference>
+                <name>postalCode</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>getContact.MailingCountry</assignToReference>
+                <name>country</name>
+            </outputParameters>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>address_map</name>
+            <extensionName>c:lwcMap</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>city</name>
+                <value>
+                    <elementReference>getContact.MailingCity</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>country</name>
+                <value>
+                    <elementReference>getContact.MailingCountry</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>postalCode</name>
+                <value>
+                    <elementReference>getContact.MailingPostalCode</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>state</name>
+                <value>
+                    <elementReference>getContact.MailingState</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>street</name>
+                <value>
+                    <elementReference>getContact.MailingStreet</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>advance_options_toggle.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>156</locationX>
-        <locationY>50</locationY>
+        <locationX>275</locationX>
+        <locationY>458</locationY>
         <connector>
-            <targetReference>Get_Contact</targetReference>
+            <targetReference>flowActionsScreen</targetReference>
         </connector>
     </start>
     <status>Draft</status>
     <subflows>
         <name>Convert_Id_To_Array</name>
         <label>Convert Id To Array</label>
-        <locationX>1324</locationX>
-        <locationY>443</locationY>
+        <locationX>905</locationX>
+        <locationY>84</locationY>
         <connector>
             <targetReference>Send_Notification</targetReference>
         </connector>
@@ -1176,27 +1067,7 @@
         <inputAssignments>
             <name>Id</name>
             <value>
-                <elementReference>Assign_User_Id.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>ArrayOfUserId</assignToReference>
-            <name>ArrayOfId</name>
-        </outputAssignments>
-    </subflows>
-    <subflows>
-        <name>Id_To_Array</name>
-        <label>Id To Array</label>
-        <locationX>1458</locationX>
-        <locationY>1005</locationY>
-        <connector>
-            <targetReference>Notification_About_Modification</targetReference>
-        </connector>
-        <flowName>Convert_ID_to_Array_of_IDs</flowName>
-        <inputAssignments>
-            <name>Id</name>
-            <value>
-                <elementReference>Assign_User_Id.Id</elementReference>
+                <elementReference>userId</elementReference>
             </value>
         </inputAssignments>
         <outputAssignments>
@@ -1213,21 +1084,6 @@
     </variables>
     <variables>
         <name>chatter_message</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>contact</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Contact</objectType>
-    </variables>
-    <variables>
-        <name>flow</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
