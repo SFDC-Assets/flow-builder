@@ -43,6 +43,6 @@ export default class LwcMap extends LightningElement {
         this.centerLocation = newLocation
         this.marker = [newLocation]
         this.showMap = true
-        console.log(`IPDATED LOCATION:`, newLocation)
+        console.log(`UPDATED LOCATION:`, newLocation)
     }
 }
