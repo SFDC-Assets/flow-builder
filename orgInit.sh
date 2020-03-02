@@ -3,4 +3,5 @@ sfdx force:data:record:update -s User -w "Name='User User'" -v "FirstName='Admin
 sfdx force:source:push
 sfdx force:user:permset:assign -n FlowBuilder
 sfdx shane:user:password:set -g Admin -l User -p salesforce1
+sfdx force:apex:execute -f scripts/generateAccountOrder.apex
 sfdx force:org:open
