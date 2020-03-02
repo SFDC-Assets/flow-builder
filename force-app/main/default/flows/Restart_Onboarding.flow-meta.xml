@@ -5,7 +5,7 @@
         <label>Reset Employee</label>
         <locationX>262</locationX>
         <locationY>50</locationY>
-        <actionName>reset</actionName>
+        <actionName>ResetOnboarding</actionName>
         <actionType>apex</actionType>
         <connector>
             <targetReference>Reset_Screen</targetReference>

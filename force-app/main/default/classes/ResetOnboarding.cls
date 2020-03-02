@@ -1,6 +1,7 @@
-public with sharing class reset {
+public with sharing class ResetOnboarding {
     
-    public static void reset() {
+    @InvocableMethod
+    public static void Reset() {
         delete [select id from equipment__c];
         delete [select id from CollaborationGroupMember where CollaborationRole != 'Admin'];
         delete [select id from Learning_Topic__c];
@@ -13,8 +14,4 @@ public with sharing class reset {
         update e;
     }
 
-    @InvocableMethod
-    public static void EmployeeReset() {
-        reset();
-    }
 }
