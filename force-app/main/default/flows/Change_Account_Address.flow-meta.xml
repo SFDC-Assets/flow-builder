@@ -358,7 +358,7 @@
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Also update the shipping address?</stringValue>
+                    <stringValue>Also update the billing address?</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
